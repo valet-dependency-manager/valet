@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2018 Vanat 
+ * Copyright (c) 2018 Vanat
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -32,14 +32,12 @@ namespace Vanat.Commands {
      * @author Robert San
      * @since 0.1.0
      */
-    public class HelpCommand {
-     
-        /**
-         * [start_process description]
-         * 
-         * @return {[type]} [description]
-         */
-        public HelpCommand () {
+    public class HelpCommand : Console.BaseCommand {
+        public override string get_name () {
+            return "help";
+        }
+
+        public override async void execute () {
             LinkedHashMap<string, string> options = new LinkedHashMap<string, string>();
             options.set("-h, --help", "Display this help message");
             options.set("-v, --version", "Display this application version");
@@ -53,7 +51,7 @@ namespace Vanat.Commands {
             available_commands.set("list", "Lists commands");
             //available_commands.set("remove", "Removes a package from the require.");
             //available_commands.set("require", "Adds required packages to your vanat.json and installs them");
-            //available_commands.set("update", "Updates your dependencies to the latest version according to vanat.json, and updates the vanat.lock file.");            
+            //available_commands.set("update", "Updates your dependencies to the latest version according to vanat.json, and updates the vanat.lock file.");
 
             VersionCommand.start_process ();
 
@@ -65,15 +63,6 @@ namespace Vanat.Commands {
 
             ConsoleUtil.write_title_custom_color("Available commands:");
             ConsoleUtil.write_options_custom_color(available_commands);
-        }
-
-        /**
-         * [start_process description]
-         * 
-         * @return {[type]} [description]
-         */
-        public static HelpCommand start_process () {
-            return new HelpCommand ();
         }
     }
 }

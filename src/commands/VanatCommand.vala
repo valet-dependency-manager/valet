@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2018 Vanat 
+ * Copyright (c) 2018 Vanat
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -32,14 +32,12 @@ namespace Vanat.Commands {
      * @author Robert San
      * @since 0.1.0
      */
-    public class VanatCommand {
-     
-        /**
-         * [start_process description]
-         * 
-         * @return {[type]} [description]
-         */
-        public VanatCommand (string arg = "") {
+    public class VanatCommand : Console.BaseCommand {
+        public override string get_name () {
+            return "default";
+        }
+
+        public override async void execute () {
             ConsoleUtil.write_custom_color("°°°°°°°°°°°°|\\", true, false, "white");
             ConsoleUtil.write_custom_color("°°°°°°°°°°°°|_\\", true, false, "white");
             ConsoleUtil.write_custom_color("°°°°°°°°°°°°|__\\", true, false, "white");
@@ -57,15 +55,6 @@ namespace Vanat.Commands {
 
             ConsoleUtil.write(StringUtil.BREAK_LINE);
             ConsoleUtil.info ("Run '" + arg + " --help' to see a full list of available command line options.");
-        }
-
-        /**
-         * [start_process description]
-         * 
-         * @return {[type]} [description]
-         */
-        public static VanatCommand start_process (string arg = "") {
-            return new VanatCommand (arg);
         }
     }
 }

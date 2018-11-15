@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2018 Vanat 
+ * Copyright (c) 2018 Vanat
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,22 +34,25 @@ namespace Vanat.Commands {
      * @author Robert San
      * @since 0.1.0
      */
-    public class InstallCommand {
-     
-        public InstallCommand () {
+    public class InstallCommand : Console.BaseCommand {
+        public override string get_name () {
+            return "install";
+        }
+
+        public override async void execute () {
             try {
                 //
                 //var vanat_lock_file = File.new_for_path (Environment.get_current_dir ()  + "/vanat.lock");
 
-                //if (vanat_lock_file.query_exists ()) {               
-                    
+                //if (vanat_lock_file.query_exists ()) {
+
                 //}
                 //
                 message (Environment.get_current_dir ().concat ("/vanat.json"));
 
                 var vanat_json_file = File.new_for_path (Environment.get_current_dir ().concat ("/vanat.json"));
 
-                if (!vanat_json_file.query_exists()) {               
+                if (!vanat_json_file.query_exists()) {
                     throw new FileOrDirectoryNotFoundException.MESSAGE("File doesn't exists\n");
                 }
 
@@ -70,17 +73,17 @@ namespace Vanat.Commands {
 
                         repository = "com.github.".concat(package);
                         string url = "https://raw.githubusercontent.com/vpackagist/".concat(repository).concat("/master/").concat(repository).concat(".json");
-                       
+
                         var json = File.new_for_uri (url);
 
                         message(url);
 
-                        if (!json.query_exists()) {               
+                        if (!json.query_exists()) {
                             throw new FileOrDirectoryNotFoundException.MESSAGE("The json file of the url does not exist\n");
                         }
 
                         var data_stream_repository = new DataInputStream(json.read());
-                        string data_repository = data_stream_repository.read_until (StringUtil.EMPTY, null);                     
+                        string data_repository = data_stream_repository.read_until (StringUtil.EMPTY, null);
 
                         File vendor_dir = File.new_for_path (Environment.get_current_dir ().concat("/vendor"));
 
@@ -99,12 +102,12 @@ namespace Vanat.Commands {
                         if (count > 1) {
                             ConsoleUtil.write ("\n");
                         }
-                        
+
                         ConsoleUtil.write_action (indexes[1], vanat_json.require.get(key), "Installing");
-                        
+
                         File target = File.new_for_uri ("https://github.com/".concat(key).concat("/archive/master.zip"));
 
-                        if (!target.query_exists()) {               
+                        if (!target.query_exists()) {
                             throw new FileOrDirectoryNotFoundException.MESSAGE("File or Directory doesn't exists\n");
                         }
 
@@ -121,14 +124,14 @@ namespace Vanat.Commands {
                         }
 
                         FileIOStream ios = meson_file.open_readwrite ();
-                        var dostream = new DataOutputStream (ios.output_stream);        
-                        
-                        string text = "robertsanseries_ffmpeg_cli_wrapper_files,\nrobertsanseries_ffmpeg_cli_wrapper_files,\n";                       
-                        
+                        var dostream = new DataOutputStream (ios.output_stream);
+
+                        string text = "robertsanseries_ffmpeg_cli_wrapper_files,\nrobertsanseries_ffmpeg_cli_wrapper_files,\n";
+
                         uint8[] text_data = text.data;
                         long written = 0;
-                        
-                        //while (written < text_data.length) { 
+
+                        //while (written < text_data.length) {
                           //  written += dos.write (text_data[written:text_data.length]);
                         //}
 
@@ -140,18 +143,9 @@ namespace Vanat.Commands {
                 } else {
                     ConsoleUtil.write_custom_color ("✓ Completed", true, false, "cyan");
                 }
-            }catch(Error e) {
-                error("%s", e.message);
+            } catch (Error e) {
+                error ("%s", e.message);
             }
-        }
-
-        /**
-         * [start_process description]
-         * 
-         * @return {[type]} [description]
-         */
-        public static InstallCommand start_process () {
-            return new InstallCommand ();
         }
     }
 }

@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2018 Vanat 
+ * Copyright (c) 2018 Vanat
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -31,25 +31,15 @@ namespace Vanat.Commands {
      * @author Robert San
      * @since 0.1.0
      */
-    public class AboutCommand {
-     
-        /**
-         * Constructs a new {@code AboutCommand} object 
-         * and sets the default exit folder.
-         */
-        public AboutCommand () {
+    public class AboutCommand : Console.BaseCommand {
+        public override string get_name () {
+            return "about";
+        }
+
+        public override async void execute () {
            ConsoleUtil.write_custom_color("Vanat - Package Management for Vala", true, false, "green");
            ConsoleUtil.write_custom_color("Vanat is a dependency manager tracking local dependencies of your projects and libraries.", true, false, "yellow");
            ConsoleUtil.write_custom_color("See https://vanat.github.io for more infor", true, false, "yellow");
-        }
-
-        /**
-         * [start_process description]
-         * 
-         * @return {[type]} [description]
-         */
-        public static AboutCommand start_process () {
-            return new AboutCommand ();
         }
     }
 }

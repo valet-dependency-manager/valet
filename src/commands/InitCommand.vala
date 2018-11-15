@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2018 Vanat 
+ * Copyright (c) 2018 Vanat
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -31,19 +31,17 @@ namespace Vanat.Commands {
      * @author Robert San
      * @since 0.1.0
      */
-    public class InitCommand {
-     
-        /**
-         * Constructs a new {@code InitCommand} object 
-         * and sets the default exit folder.
-         */
-        public InitCommand () {
+    public class InitCommand : Console.BaseCommand {
+        public override string get_name () {
+            return "init";
+        }
 
+        public override async void execute () {
             ConsoleUtil.write(StringUtil.BREAK_LINE);
             ConsoleUtil.write_custom_color("                                     ", true, false, "white", "blue");
             ConsoleUtil.write_custom_color("Welcome to the Vanat config generator", true, false, "black", "blue");
             ConsoleUtil.write_custom_color("                                     ", true, false, "white", "blue");
-            
+
             ConsoleUtil.write(StringUtil.BREAK_LINE);
             ConsoleUtil.write_custom_color("This command will guide you through creating your vanat.json config.", true, false);
 
@@ -68,7 +66,7 @@ namespace Vanat.Commands {
 
             string vanat_json = this.mount_file_data_vanat_json (package, description, version, author, type, license);
             ConsoleUtil.write(StringUtil.BREAK_LINE);
-            
+
             ConsoleUtil.write(vanat_json);
             ConsoleUtil.write(StringUtil.BREAK_LINE);
 
@@ -97,11 +95,11 @@ namespace Vanat.Commands {
         private string mount_file_data_vanat_json (string package, string description, string version, string author, string type, string license) {
             string file_data_vanat_json = StringUtil.EMPTY;
             file_data_vanat_json += "{\n";
-            
+
             if (package.length > 0) {
-                file_data_vanat_json += StringUtil.format(StringUtil.SPACE, StringUtil.EMPTY, 4, true) + "\"name\": \"" + package + "\"," + StringUtil.BREAK_LINE;    
+                file_data_vanat_json += StringUtil.format(StringUtil.SPACE, StringUtil.EMPTY, 4, true) + "\"name\": \"" + package + "\"," + StringUtil.BREAK_LINE;
             }
-            
+
             if (description.length > 0) {
                 file_data_vanat_json += StringUtil.format(StringUtil.SPACE, StringUtil.EMPTY, 4, true) + "\"description\": \"" + description + "\"," + StringUtil.BREAK_LINE;
             }
@@ -128,15 +126,6 @@ namespace Vanat.Commands {
             file_data_vanat_json += "\n}";
 
             return file_data_vanat_json;
-        }
-
-        /**
-         * [start_process description]
-         * 
-         * @return {[type]} [description]
-         */
-        public static InitCommand start_process () {
-            return new InitCommand ();
         }
     }
 }
