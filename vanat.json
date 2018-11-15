@@ -2,7 +2,16 @@
     "name": "vanat/vanat",
     "description": "Dependency Manager for Vala",
     "version": "0.0.1",
-    "author": "Robert San <robertsanseries@gmail.com>",
+    "author": [
+    	{
+    		"nome": "Robert San",
+    		"email": "robertsanseries@gmail.com"
+    	},
+    	{
+    		"nome": "Nando Sousa",
+    		"email": ""
+    	}
+    ],
     "require": {
         "naaando/console-command":"1.0.0"
     }
